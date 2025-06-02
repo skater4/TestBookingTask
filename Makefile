@@ -30,13 +30,10 @@ composer-dump:
 	docker-compose config -q && \
 	docker-compose exec laravel composer dump-autoload -o
 
-ide-helper:
-	docker-compose config -q && \
-	docker-compose exec laravel php artisan ide-helper:generate
-
-ide-helper-models:
-	docker-compose config -q && \
-	docker-compose exec laravel php artisan ide-helper:models
+generate:
+	docker compose exec laravel php artisan ide-helper:generate && \
+	docker compose exec laravel php artisan ide-helper:meta && \
+	docker compose exec laravel php artisan ide-helper:models -M
 
 generate-key:
 	docker-compose config -q && \
@@ -54,21 +51,6 @@ test:
 	docker-compose config -q && \
 	docker-compose exec laravel php artisan test
 
-npm-install:
-	docker-compose config -q && \
-	docker-compose run --rm node npm i && \
-	docker-compose run --rm node npm install dotenv && \
-	docker-compose run --rm node npm install jquery && \
-	docker-compose run --rm node npm run build
-
-npm-watch:
-	docker-compose config -q && \
-	docker-compose run --rm node npm run watch
-
-webpack:
-	docker-compose config -q && \
-	docker-compose run --rm node npm run dev
-
 clearcache:
 	docker-compose exec laravel php artisan cache:clear; \
 	docker-compose exec laravel php artisan clear-compiled; \
@@ -78,7 +60,10 @@ clearcache:
 	docker-compose exec laravel php artisan optimize; \
 	true
 
-run-queue:
-	docker-compose exec laravel pkill -9 -f queue; \
-	docker-compose exec laravel php /var/www/html/artisan queue:listen --queue=highest,high,medium,low --timeout=300; \
-	true;
+pint:
+	docker compose config -q && \
+	docker compose exec laravel sh pint.sh
+
+phpstan:
+	docker compose config -q && \
+	docker compose exec laravel sh phpstan.sh

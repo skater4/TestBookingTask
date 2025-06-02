@@ -1,0 +1,19 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 5
+    phpVersion: 80200 # PHP 8.3
+    reportUnmatchedIgnoredErrors: false
+    paths:
+        - app
+        - database/migrations
+    excludePaths:
+        - ./_ide_helper.php
+        - ./_ide_helper_models.php
+        - ./*/Tests/*
+        - ./*/Factories/*
+    universalObjectCratesClasses:
+        - Illuminate\Http\Resources\Json\JsonResource
+    bootstrapFiles:
+        - ./_ide_helper_models.php
