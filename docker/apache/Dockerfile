@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Установка необходимых расширений: pdo_mysql и zip (для composer, если нужно)
+# Установка необходимых расширений: pdo_pgsql и zip (для composer, если нужно)
 RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
