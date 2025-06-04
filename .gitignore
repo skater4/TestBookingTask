@@ -1,3 +1,22 @@
+# Environment files
 .env
-.idea
-pgdata
+.env.*
+!.env.example
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Database
+pgdata/
+
+# IDE and OS files
+.idea/
+.DS_Store
+
+# Laravel specific
+/storage/app/public
+/public/storage
+
+# PHPUnit
+.phpunit.result.cache
