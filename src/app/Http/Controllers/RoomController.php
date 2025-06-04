@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoomRequest;
+use App\Http\Resources\RoomResource;
 use App\Services\RoomService;
-use App\Transformers\RoomResource;
 use Cache;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RoomController extends Controller
@@ -19,8 +18,9 @@ class RoomController extends Controller
     {
         $validated = $request->validated();
         $date = $validated['date'] ?? null;
+        $cacheKey = $date ? "available_rooms_$date" : 'available_rooms_default';
 
-        $availableRooms = Cache::remember("available_rooms_{$date}", now()->addMinutes(5), function () use ($date) {
+        $availableRooms = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($date) {
             return $this->roomService->getAvailableRooms(
                 date: $date
             );

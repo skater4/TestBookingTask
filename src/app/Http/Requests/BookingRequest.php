@@ -21,7 +21,7 @@ class BookingRequest extends FormRequest
         return match ($this->method()) {
             RequestAlias::METHOD_POST => [
                 'room_id' => ['required', 'integer', 'exists:rooms,id'],
-                'booking_date' => ['required', 'date', 'after_or_equal:today'],
+                'booking_date' => ['required', 'date', 'after_or_equal:today', 'date_format:Y-m-d'],
             ],
             default => [],
         };

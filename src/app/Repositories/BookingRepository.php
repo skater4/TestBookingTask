@@ -4,12 +4,9 @@ namespace App\Repositories;
 
 use App\Models\Booking;
 
-/**
- * @property Booking $model
- */
+/** @extends BaseRepository<Booking> */
 class BookingRepository extends BaseRepository
 {
-
     protected function getModelClass(): string
     {
         return Booking::class;

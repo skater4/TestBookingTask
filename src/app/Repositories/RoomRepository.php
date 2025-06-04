@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Room;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * @property Room $model
@@ -21,7 +21,6 @@ class RoomRepository extends BaseRepository
         $days = $start->diffInDays($end) + 1;
 
         return $this->model
-            ->with('bookings')
             ->whereRaw('(
             SELECT COUNT(*) FROM bookings
             WHERE bookings.room_id = rooms.id

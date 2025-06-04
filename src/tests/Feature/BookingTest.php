@@ -33,7 +33,7 @@ class BookingTest extends TestCase
         $this->assertDatabaseHas('bookings', [
             'user_id' => $user->id,
             'room_id' => $room->id,
-            'booking_date' => $date->toDateTimeString(),
+            'booking_date' => $date->toDateString(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class BookingTest extends TestCase
         Booking::factory()->create([
             'room_id' => $room->id,
             'user_id' => $user1->id,
-            'booking_date' => $date->toDateTimeString(),
+            'booking_date' => $date->toDateString(),
         ]);
 
         Sanctum::actingAs($user2);

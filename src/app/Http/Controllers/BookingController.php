@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingRequest;
+use App\Http\Resources\BookingResource;
 use App\Services\BookingService;
-use App\Transformers\BookingResource;
 
 class BookingController extends Controller
 {
